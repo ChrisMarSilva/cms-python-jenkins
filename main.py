@@ -9,9 +9,13 @@ import fastapi as _fastapi
 app = _fastapi.FastAPI()
 
 
-@app.get("/")
+@app.get(path="/", status_code=_fastapi.status.HTTP_200_OK)
 def read_root():
-    return {"Cor": str(os.getenv(key='COR', default="AZUL")), "PID": str(os.getpid())}
+    return {
+        "message": "Hello World",
+        "Cor": str(os.getenv(key='COR', default="AZUL")),
+        "PID": str(os.getpid())
+    }
 
 
 if __name__ == "__main__":
@@ -22,10 +26,17 @@ if __name__ == "__main__":
     # asyncio.run(serve(app, config))
     pass
 
+# python3 -m venv venv
+# source venv/Scripts/activate
+# cd venv\Scripts
+# activate
+
 # pip install --upgrade pip
 # pip install fastapi[all] -U
 # pip install "uvicorn[standard]" -U
 # pip install "hypercorn[trio]" -U
+# pip install pytest -U
+# pip install pytest-cov -U
 
 # uvicorn main:app --reload
 # hypercorn main:app --worker-class trio
@@ -43,4 +54,3 @@ if __name__ == "__main__":
 # kubectl delete deployment wrk-jenkins-preto-01
 # kubectl delete rs wrk-jenkins-preto-01-59f65b4495
 # kubectl apply -f deployment.yaml
-

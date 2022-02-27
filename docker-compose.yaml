@@ -1,0 +1,65 @@
+version: "3.8"
+
+networks:
+  network-web-fastapi-proxy:
+    driver: bridge
+
+services:
+
+  wrk-jenkins-nginx:
+    container_name: wrk-jenkins-nginx
+    image: nginx:1.21.6-alpine
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    depends_on:
+      - wrk-fastapi-jenkins-01
+      - wrk-fastapi-jenkins-02
+    networks:
+      - network-web-fastapi-proxy
+
+  wrk-jenkins-preto-01:
+    container_name: wrk-jenkins-preto-01
+    build: .
+    restart: always
+    environment:
+      - COR=PRETO-01
+    volumes:
+      - .:/code
+    networks:
+      - network-web-fastapi-proxy
+
+  wrk-jenkins-preto-02:
+    container_name: wrk-jenkins-preto-02
+    build: .
+    restart: always
+    environment:
+      - COR=PRETO-02
+    volumes:
+      - .:/code
+    networks:
+      - network-web-fastapi-proxy
+
+  wrk-jenkins-verde-01:
+    container_name: wrk-jenkins-verde-01
+    build: .
+    restart: always
+    environment:
+      - COR=VERDE-01
+    volumes:
+      - .:/code
+    networks:
+      - network-web-fastapi-proxy
+
+  wrk-jenkins-verde-02:
+    container_name: wrk-jenkins-verde-02
+    build: .
+    restart: always
+    environment:
+      - COR=VERDE-02
+    volumes:
+      - .:/code
+    networks:
+      - network-web-fastapi-proxy

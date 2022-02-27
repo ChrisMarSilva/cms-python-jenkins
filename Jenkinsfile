@@ -2,8 +2,8 @@ pipeline {
     //agent any
     //agent { docker { image 'tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim' } }
     //agent { docker { image 'python3.9-slim' } }
-    agent { docker { image 'python:3.7' label 'docker && linux' } }
-    //agent { dockerfile { filename 'Dockerfile' } }
+    //agent { docker { image 'python:3.7' label 'docker && linux' } }
+    agent { dockerfile { filename 'Dockerfile' } }
     // agent { docker { image 'python:3.9-slim-buster' } }
 
 

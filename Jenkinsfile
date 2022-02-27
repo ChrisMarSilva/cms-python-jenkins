@@ -12,16 +12,16 @@ pipeline {
         stage('Get Source') {
             steps {
                 echo 'Get Source ok....'
-                git branch: 'master', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git', credentialsId: 'github'
+                // git branch: 'master', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git', credentialsId: 'github'
             }
         }
 
         stage ('Docker Build') {
             steps {
                 echo 'Docker Build ok....'
-                script {
-                    dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
-                }
+//                 script {
+//                     dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
+//                 }
             }
         }
 

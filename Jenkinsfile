@@ -1,12 +1,32 @@
 pipeline {
-    agent { docker { image 'python:3.10.1-alpine' } }
+    agent any
+
     stages {
-        stage('build') {
+
+        stage('Get Source') {
             steps {
-                echo 'Build Image ok2....'
-                //sh 'python --version'
+                git branch: 'master', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git', credentialsId: 'github'
             }
         }
+
+        stage('Build') {
+            steps {
+                echo 'Build ok....'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Test ok....'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying ok....'
+            }
+        }
+
     }
 }
 
@@ -20,6 +40,17 @@ pipeline {
 https://www.fourkitchens.com/blog/article/trigger-jenkins-builds-pushing-github/
 https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
 
+pipeline {
+    agent { docker { image 'python:3.10.1-alpine' } }
+    stages {
+        stage('build') {
+            steps {
+                echo 'Build Image ok2....'
+                //sh 'python --version'
+            }
+        }
+    }
+}
 
 
 pipeline {

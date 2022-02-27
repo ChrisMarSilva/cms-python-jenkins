@@ -1,6 +1,25 @@
+pipeline {
+    agent { docker { image 'python:3.10.1-alpine' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'python --version'
+            }
+        }
+    }
+}
+
+/*
+
+
 
 // cms-python-jenkins
 // https://github.com/ChrisMarSilva/cms-python-jenkins.git
+
+https://www.fourkitchens.com/blog/article/trigger-jenkins-builds-pushing-github/
+https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
+
+
 
 pipeline {
     //agent any
@@ -119,34 +138,9 @@ pipeline {
 //             }
 //           }
 //         }
-        
+
     }
 }
-
-/*
-
-
-http://localhost:8080/updateCenter/
-http://localhost:8080/cms-tnb-python-site-fastapi/
-
-
-https://www.youtube.com/watch?v=O6y27_Ol25g
-https://www.youtube.com/watch?v=PxdsFL4NDfM
-
-https://www.fourkitchens.com/blog/article/trigger-jenkins-builds-pushing-github/
-https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
-
-pipeline {
-    agent { docker { image 'python:3.10.1-alpine' } }
-    stages {
-        stage('build') {
-            steps {
-                sh 'python --version'
-            }
-        }
-    }
-}
-
 
 */
 

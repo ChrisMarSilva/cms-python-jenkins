@@ -44,15 +44,15 @@ pipeline {
         }
 
         stage('Build') {
-            withEnv(["HOME=${env.WORKSPACE}"]) {
-              sh "pip install -r requirements.txt --user"
-            }
+//             withEnv(["HOME=${env.WORKSPACE}"]) {
+//               sh "pip install -r requirements.txt --user"
+//             }
             steps {
                 echo 'Build ok....'
-                sh 'python -V'
-                sh 'python -m pip install --upgrade pip'
+//                 sh 'python -V'
+//                 sh 'python -m pip install --upgrade pip'
                 //sh 'pip install --upgrade pip'
-                sh 'python -m pip install -r requirements.txt --user --no-cache'
+               // sh 'python -m pip install -r requirements.txt --user --no-cache'
                 // sh 'python setup.py sdist'
 //                 sh '''
 //                     python -V
@@ -66,7 +66,7 @@ pipeline {
             steps {
                 echo 'Test ok....'
                 // sh 'python test_main.py'
-                sh 'pytest test_main.py'
+                //sh 'pytest test_main.py'
 //                 sh '''
 //                     python -m venv .venv
 //                     . .venv/bin/activate

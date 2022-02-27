@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wrk-jenkins-preto-01
+  namespace: default
+  labels:
+    app: wrk-jenkins-preto-01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wrk-jenkins-preto-01
+  template:
+    metadata:
+      labels:
+        app: wrk-jenkins-preto-01
+    spec:
+      containers:
+        - name: wrk-jenkins-preto-01
+          image: chrismarsilva/cms-python-jenkins:{{tag}}
+          ports:
+            - containerPort: 8082
+          imagePullPolicy: Never
+          env:
+          - name: COR
+            value: PRETO-01
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wrk-jenkins-preto-01
+  namespace: default
+  labels:
+    app: wrk-jenkins-preto-01
+spec:
+  selector:
+    app: wrk-jenkins-preto-01
+  ports:
+    - port: 80
+      targetPort: 8082
+  type: LoadBalancer
+---

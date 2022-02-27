@@ -35,3 +35,7 @@ if __name__ == "__main__":
 
 # docker-compose down
 # docker-compose up -d --build
+
+# kubectl config get-contexts
+# kubectl config use-context docker-desktop
+# kubectl apply -f deployment.yaml

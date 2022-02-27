@@ -42,9 +42,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build ok....'
-                sh 'python --version'
                 // sh 'pip install -r requirements.txt --user'
-                //sh 'pip install -r requirements.txt'
+                sh 'pip install -r requirements.txt'
             }
         }
 

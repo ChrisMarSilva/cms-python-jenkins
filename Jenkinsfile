@@ -42,15 +42,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build ok....'
-                // sh 'pip install -r requirements.txt --user'
-                sh 'pip install -r requirements.txt'
+                //sh 'pip install -r requirements.txt --user'
+                // sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Test ok....'
-                //sh 'python test_main.py'
+                sh 'python test_main.py'
             }
         }
 

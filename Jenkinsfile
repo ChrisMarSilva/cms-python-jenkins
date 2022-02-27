@@ -64,7 +64,7 @@ pipeline {
         stage ('Commit in prod branch') {
             steps {
                 echo 'Commit ok....'
-                sh ''' echo "commit prod branch" '''
+                //sh ''' echo "commit prod branch" '''
             }
         }
 

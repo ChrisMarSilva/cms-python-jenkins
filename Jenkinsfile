@@ -5,12 +5,14 @@ pipeline {
 
         stage('Get Source') {
             steps {
+                echo 'Get Source ok....'
                 git branch: 'master', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git', credentialsId: 'github'
             }
         }
 
         stage ('Docker Build') {
             steps {
+                echo 'Docker Build ok....'
                 script {
                     dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
                 }
@@ -19,8 +21,8 @@ pipeline {
 
         stage ('Docker Push Image') {
             steps {
+                echo 'Docker Push Image ok....'
                 script {
-                    echo 'Docker Push Image ok....'
 //                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 //                         dockerapp.push('latest')
 //                         dockerapp.push("${env.BUILD_ID}")

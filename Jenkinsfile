@@ -11,7 +11,7 @@ pipeline {
 
         stage ('Build Image') {
             steps {
-                echo 'Build Image ok....'
+                echo 'Build Image ok2....'
 //                 script {
 //                     dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
 //                 }

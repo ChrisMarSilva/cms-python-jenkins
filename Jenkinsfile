@@ -3,6 +3,9 @@ pipeline {
     //agent { docker { image 'tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim' } }
     //agent { docker { image 'python3.9-slim' } }
     agent { docker { image 'python:3.7' label 'docker && linux' } }
+    //agent { dockerfile { filename 'Dockerfile' } }
+    // agent { docker { image 'python:3.9-slim-buster' } }
+
 
     stages {
 
@@ -41,10 +44,21 @@ pipeline {
         }
 
         stage('Build') {
+            withEnv(["HOME=${env.WORKSPACE}"]) {
+              sh "pip install -r requirements.txt --user"
+            }
             steps {
                 echo 'Build ok....'
-                sh 'pip install -r requirements.txt --user'
-                //sh 'pip install -r requirements.txt'
+                sh 'python -V'
+                sh 'python -m pip install --upgrade pip'
+                //sh 'pip install --upgrade pip'
+                sh 'python -m pip install -r requirements.txt --user --no-cache'
+                // sh 'python setup.py sdist'
+//                 sh '''
+//                     python -V
+//                     sudo python -m pip install -r requirements.txt --user --no-cache
+//                     sudo python setup.py sdist
+//                 '''
             }
         }
 
@@ -53,6 +67,12 @@ pipeline {
                 echo 'Test ok....'
                 // sh 'python test_main.py'
                 sh 'pytest test_main.py'
+//                 sh '''
+//                     python -m venv .venv
+//                     . .venv/bin/activate
+//                     pip install -r requirements.txt
+//                     pytest -v
+//                 '''
             }
         }
 

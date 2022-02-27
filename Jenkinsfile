@@ -40,26 +40,29 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'python --version'
+                echo 'Build ok....'
+                // sh 'python --version'
                 // sh 'pip install -r requirements.txt --user'
                 // sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
-          steps {
-            sh 'python test_main.py'
-          }
+            steps {
+                echo 'Test ok....'
+                sh 'python test_main.py'
+            }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying ok....'
             }
         }
 
         stage ('Commit in prod branch') {
             steps {
+                echo 'Commit ok....'
                 sh ''' echo "commit prod branch" '''
             }
         }

@@ -38,4 +38,9 @@ if __name__ == "__main__":
 
 # kubectl config get-contexts
 # kubectl config use-context docker-desktop
+# kubectl config use-context minikube
+# kubectl delete service wrk-jenkins-preto-01
+# kubectl delete deployment wrk-jenkins-preto-01
+# kubectl delete rs wrk-jenkins-preto-01-59f65b4495
 # kubectl apply -f deployment.yaml
+

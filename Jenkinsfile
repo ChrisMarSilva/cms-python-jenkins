@@ -17,19 +17,31 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage ('Docker Push Image') {
+            steps {
+                script {
+                    echo 'Docker Push Image ok....'
+//                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+//                         dockerapp.push('latest')
+//                         dockerapp.push("${env.BUILD_ID}")
+//                     }
+                }
+            }
+        }
+
+        stage('Build App') {
             steps {
                 echo 'Build ok....'
             }
         }
 
-        stage('Test') {
+        stage('Test App') {
             steps {
                 echo 'Test ok....'
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy App') {
             steps {
                 echo 'Deploying ok....'
             }
@@ -107,18 +119,13 @@ pipeline {
             }
         }
 
-        stage('build1') {
-            steps {
-                sh 'python --version'
-            }
-        }
-
         stage('Build') {
 //             withEnv(["HOME=${env.WORKSPACE}"]) {
 //               sh "pip install -r requirements.txt --user"
 //             }
             steps {
                 echo 'Build ok....'
+                sh 'python --version'
 //                 sh 'python -V'
 //                 sh 'python -m pip install --upgrade pip'
                 //sh 'pip install --upgrade pip'

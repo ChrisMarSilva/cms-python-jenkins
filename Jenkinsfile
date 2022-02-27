@@ -9,6 +9,14 @@ pipeline {
             }
         }
 
+        stage ('Docker Build') {
+            steps {
+                script {
+                    dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Build ok....'

@@ -3,6 +3,12 @@ pipeline {
 
     stages {
 
+        stage ('Checkout Source') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Get Source') {
             steps {
                 echo 'Get Source ok....'

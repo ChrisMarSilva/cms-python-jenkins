@@ -136,7 +136,17 @@ https://www.youtube.com/watch?v=PxdsFL4NDfM
 https://www.fourkitchens.com/blog/article/trigger-jenkins-builds-pushing-github/
 https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
 
-
+pipeline {
+    agent { docker { image 'python:3.10.1-alpine' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'python --version'
+            }
+        }
+    }
+}
 
 
 */
+

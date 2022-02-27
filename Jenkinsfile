@@ -1,6 +1,7 @@
 pipeline {
     //agent any
-    agent { docker { image 'tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim' } }
+    //agent { docker { image 'tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim' } }
+     agent { docker { image 'python3.9-slim' } }
 
     stages {
 
@@ -43,14 +44,14 @@ pipeline {
                 echo 'Build ok....'
                 // sh 'python --version'
                 // sh 'pip install -r requirements.txt --user'
-                // sh 'pip install -r requirements.txt'
+                 sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Test ok....'
-                //sh 'python test_main.py'
+                sh 'python test_main.py'
             }
         }
 

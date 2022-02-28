@@ -60,6 +60,27 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
+    - name: linting
+      uses: alexanderdamiani/pylinter@v1.4.2
+      with:
+        python-root: '.'
+        flake8-flags: '--count --show-source --statistics'
+        mypy-flags: '--ignore-missing-imports'
+        fail-on-isort: true
+        #mypy-ignore-dirs-files: 'folder1 folder2/main.py'
+
+    - name: commit isort changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A && git diff-index --cached --quiet HEAD || git commit -m 'isort'
+
+    - name: push isort changes
+      uses: ad-m/github-push-action@v0.5.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+
     - name: Test with pytest
       run: |
         python -m pytest -vv

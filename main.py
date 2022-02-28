@@ -131,6 +131,10 @@ def protected_route(user=_fastapi.Depends(manager)):
 # kubectl delete rs wrk-jenkins-preto-01-59f65b4495
 # kubectl apply -f deployment.yaml
 
+# git add *
+# git commit -m "bla bla bla"
+# git push
+
 # git tag
 # git tag v1.0.0
 # git push --tags

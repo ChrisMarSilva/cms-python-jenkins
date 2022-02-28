@@ -8,43 +8,36 @@ Projeto FastAPI para testes
 
 ## Packages Python usados
 
+- [`fastapi`](https://pypi.org/project/fastapi/)
+- [`fastapi-login`](https://pypi.org/project/fastapi-login/)
+- [`uvicorn`](https://pypi.org/project/uvicorn/)
 - [`pytest`](https://pypi.org/project/pytest/)
 - [`pytest-cov`](https://pypi.org/project/pytest-cov/)
 
+## Exemplo
 
-## Template workflow file
+* Arquivo `main.py`:
 
-```yaml
+```Python
 # **************************************************************************************************************** #
-# This workflow will install Python dependencies, and run `pytest --cov` on all files recursively from the `pytest-root-dir`
-# The workflow is also configured to exit with error if minimum individual file or total pytest coverage minimum not met
-# If the workflow exits with error, an informative issue is created for the repo alerting the user
-# If the workflow succeeds, a commit message is generated with the `pytest --cov` markdown table
+# Código
 # **************************************************************************************************************** #
 
-name: pytester-cov workflow
+from typing import Optional
 
-on: [push, pull_request]
+from fastapi import FastAPI
 
-jobs:
-  build:
+app = FastAPI()
 
-    runs-on: ubuntu-latest
-    env:
-      COVERAGE_SINGLE: 60
-      COVERAGE_TOTAL: 60
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Optional[str] = None):
+    return {"item_id": item_id, "q": q}
 ```
 
 ## Site CMS

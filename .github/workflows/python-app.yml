@@ -31,9 +31,9 @@ jobs:
     #  run: echo"This runs because Git tag points at HEAD ..."
     #  if: env.HEAD_TAG != '' 
 
-    - name: Runs only if Git tag exists 2
-      run: echo "This runs because Git tag points at HEAD ..."
-      if:github.tag != '' 
+    # - name: Runs only if Git tag exists 2
+    #   run: echo "This runs because Git tag points at HEAD ..."
+    #   if:github.tag != '' 
 
     - name: Set up Python 3.10
       uses: actions/setup-python@v2

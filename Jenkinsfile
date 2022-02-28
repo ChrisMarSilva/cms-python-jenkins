@@ -1,14 +1,14 @@
 pipeline {
     //agent any
-    agent { docker { image 'python:3.10.1-alpine' } }
+    agent { dockerfile { filename 'Dockerfile' } }
 
     stages {
 
-        stage ('Checkout Source') {
-            steps {
-                checkout scm
-            }
-        }
+//         stage ('Checkout Source') {
+//             steps {
+//                 checkout scm
+//             }
+//         }
 
         stage('Get Source') {
             steps {
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Docker Build ok....'
                 //sh 'python --version'
-                //sh 'python -V'
+                sh 'python -V'
                 sh 'python -m pip install --upgrade pip'
                 //sh 'pip install --upgrade pip'
                 //sh 'python -m pip install -r requirements.txt --user --no-cache'

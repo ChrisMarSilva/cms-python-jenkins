@@ -78,7 +78,7 @@ jobs:
     - name: push isort changes
       uses: ad-m/github-push-action@v0.5.0
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GH_GITHUB_TOKEN }}
         branch: ${{ github.ref }}
 
     - name: Test with pytest

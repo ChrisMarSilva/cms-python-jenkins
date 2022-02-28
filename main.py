@@ -71,7 +71,7 @@ def login(response: _fastapi.Response):
         raise InvalidCredentialsException 
     elif password != user['password']:
         raise InvalidCredentialsException
-        
+
     access_token = manager.create_access_token(
         data=dict(sub=email), 
         expires=timedelta(hours=12),

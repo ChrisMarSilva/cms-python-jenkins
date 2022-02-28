@@ -9,15 +9,15 @@ from fastapi_login.exceptions import InvalidCredentialsException
 
 app = _fastapi.FastAPI()
 manager = LoginManager(
-    secret='b#=x&h)cms#lsr*4+jghmlsrpe^p3nyoamu$860gip$4h+00w', 
-    token_url='/login', 
+    secret='b#=x&h)cms#lsr*4+jghmlsrpe^p3nyoamu$860gip$4h+00w',
+    token_url='/login',
     use_cookie=True,
 )
 
 
 @app.get(
-    path="/", 
-    response_class=_fastapi.responses.HTMLResponse, 
+    path="/",
+    response_class=_fastapi.responses.HTMLResponse,
     status_code=_fastapi.status.HTTP_200_OK,
 )
 def read_root():
@@ -37,7 +37,7 @@ def read_root():
 </html>
 '''
     return _fastapi.responses.HTMLResponse(
-        content=html_content, 
+        content=html_content,
         status_code=_fastapi.status.HTTP_200_OK,
     )
 
@@ -45,9 +45,9 @@ def read_root():
 @app.get(path="/test", status_code=_fastapi.status.HTTP_200_OK)
 def read_test():
     return {
-        "message": "Hello World", 
-        "Cor": str(os.getenv(key='COR', default="AZUL")), 
-        "PID": str(os.getpid()), 
+        "message": "Hello World",
+        "Cor": str(os.getenv(key='COR', default="AZUL")),
+        "PID": str(os.getpid()),
         "HostName": str(socket.gethostname()),
     }
 
@@ -63,27 +63,27 @@ def load_user(email: str):
 
 @app.get(path='/login', status_code=_fastapi.status.HTTP_200_OK)
 def login(response: _fastapi.Response):
-    # data: OAuth2PasswordRequestForm = _fastapi.Depends() 
+    # data: OAuth2PasswordRequestForm = _fastapi.Depends()
     email = "chris@.mail"  # data.username
     password = "123"  # data.password
     user = load_user(email)
     if not user:
-        raise InvalidCredentialsException 
+        raise InvalidCredentialsException
     elif password != user['password']:
         raise InvalidCredentialsException
 
     access_token = manager.create_access_token(
-        data=dict(sub=email), 
+        data=dict(sub=email),
         expires=timedelta(hours=12),
     )
 
     manager.set_cookie(
-            response=response, 
+            response=response,
             token=access_token,
         )
 
     return {
-            'access_token': access_token, 
+            'access_token': access_token,
             'token_type': 'bearer',
         }
 
@@ -97,8 +97,6 @@ def protected_route(user=_fastapi.Depends(manager)):
         'hostname': str(socket.gethostname()),
         'username': user,
     }
-
-
 
 
 # python3 -m venv venv
@@ -118,7 +116,7 @@ def protected_route(user=_fastapi.Depends(manager)):
 # hypercorn main:app --worker-class trio
 
 # pip freeze > requirements.txt
-# pip install -r requirements.txt      
+# pip install -r requirements.txt
 
 # docker-compose down
 # docker-compose up -d --build

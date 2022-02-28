@@ -90,7 +90,7 @@ def protected_route(user=_fastapi.Depends(manager)):
 # hypercorn main:app --worker-class trio
 
 # pip freeze > requirements.txt
-# pip install -r requirements.txt  
+# pip install -r requirements.txt    
 
 # docker-compose down
 # docker-compose up -d --build

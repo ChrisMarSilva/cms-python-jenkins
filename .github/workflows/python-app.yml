@@ -18,7 +18,7 @@ on:
 jobs:
   build:
 
-    if: ${{ startsWith(github.ref, 'v') }}
+    if: ${{ startsWith(github.ref, 'v') }} 
     runs-on: ubuntu-latest
 
     steps:

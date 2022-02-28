@@ -11,7 +11,9 @@ services:
     image: nginx:1.21.6-alpine
     restart: always
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf  # para Configurações Gerais
+      # - ./nginx.conf:/etc/nginx/conf.d/default.conf  # para Configurações Específicas  # comente enviar os "upstream" e o "server", nao deve ter o "events" e nem o "http"
+      - ./log/nginx:/var/log/nginx
     ports:
       - 80:80
     depends_on:
@@ -25,7 +27,8 @@ services:
     build: .
     restart: always
     environment:
-      - COR=PRETO-01
+      - COR=000000
+      - COR_DESCR=PRETO
     volumes:
       - .:/code
     networks:
@@ -36,7 +39,8 @@ services:
     build: .
     restart: always
     environment:
-      - COR=PRETO-02
+      - COR=FF0000
+      - COR_DESCR=VERMELHO
     volumes:
       - .:/code
     networks:
@@ -47,7 +51,8 @@ services:
     build: .
     restart: always
     environment:
-      - COR=VERDE-01
+      - COR=00FF00
+      - COR_DESCR=VERDE
     volumes:
       - .:/code
     networks:
@@ -58,7 +63,8 @@ services:
     build: .
     restart: always
     environment:
-      - COR=VERDE-02
+      - COR=0000FF
+      - COR_DESCR=AZUL
     volumes:
       - .:/code
     networks:

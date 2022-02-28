@@ -5,6 +5,8 @@ metadata:
   name: wrk-jenkins-preto-01
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: wrk-jenkins-preto-01
@@ -19,6 +21,7 @@ spec:
           #image: chrismarsilva/cms-python-jenkins:6
           ports:
             - containerPort: 8082
+          imagePullPolicy: Never
           env:
           - name: COR
             value: PRETO-01
@@ -32,6 +35,7 @@ spec:
     app: wrk-jenkins-preto-01
   ports:
     - port: 80
+      protocol: TCP
       targetPort: 8082
   type: LoadBalancer
 ---

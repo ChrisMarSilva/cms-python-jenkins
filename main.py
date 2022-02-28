@@ -1,30 +1,31 @@
 import os
+import socket
 import fastapi as _fastapi
-# import uvicorn
-# import asyncio
-# from hypercorn.config import Config
-# from hypercorn.asyncio import serve
 
 
 app = _fastapi.FastAPI()
 
 
-@app.get(path="/", status_code=_fastapi.status.HTTP_200_OK)
+@app.get(path="/", response_class=_fastapi.responses.HTMLResponse, status_code=_fastapi.status.HTTP_200_OK)
 def read_root():
-    return {
-        "message": "Hello World",
-        "Cor": str(os.getenv(key='COR', default="AZUL")),
-        "PID": str(os.getpid())
-    }
+    # return {"message": "Hello World", "Cor": str(os.getenv(key='COR', default="AZUL")), "PID": str(os.getpid()), "HostName": str(socket.gethostname())}
+    cor = os.getenv(key='COR', default="#000000")
+    cor_descr = os.getenv(key='COR_DESCR', default="PRETO")
+    html_content = f'''
+        <!DOCTYPE html> 
+        <html> 
+            <body bgcolor="#{str(cor)}"> 
+                <div style="text-align: center"> 
+                    <br/> <br/>
+                    <h1 style="color: white">EU SOU A COR {str(cor_descr)}</h1> 
+                    <p style="color: white">PID: {str(os.getpid())}</p> 
+                    <p style="color: white">HostName: {str(socket.gethostname())}</p>
+                </div> 
+            </body> 
+        </html> 
+    '''
+    return _fastapi.responses.HTMLResponse(content=html_content, status_code=_fastapi.status.HTTP_200_OK)
 
-
-if __name__ == "__main__":
-    # uvicorn.run("main:app", host="127.0.0.1", port=5001, log_level="info", reload=True, debug=True, workers=1)
-    # config = Config()
-    # config.bind = ["127.0.0.1:5001"]
-    # config.use_reloader = True
-    # asyncio.run(serve(app, config))
-    pass
 
 # python3 -m venv venv
 # source venv/Scripts/activate

@@ -20,7 +20,10 @@ pipeline {
             steps {
                 echo 'Docker Build ok....'
                 //sh 'python --version'
-                sh 'python -V'
+                //sh 'python -V'
+                sh 'python -m pip install --upgrade pip'
+                //sh 'pip install --upgrade pip'
+                //sh 'python -m pip install -r requirements.txt --user --no-cache'
 //                 script {
 //                     dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
 //                 }
@@ -122,10 +125,6 @@ pipeline {
 //             }
             steps {
                 echo 'Build ok....'
-//                 sh 'python -m pip install --upgrade pip'
-                //sh 'pip install --upgrade pip'
-               // sh 'python -m pip install -r requirements.txt --user --no-cache'
-                // sh 'python setup.py sdist'
 //                 sh '''
 //                     python -V
 //                     sudo python -m pip install -r requirements.txt --user --no-cache

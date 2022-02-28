@@ -8,33 +8,48 @@ from fastapi_login.exceptions import InvalidCredentialsException
 
 
 app = _fastapi.FastAPI()
-manager = LoginManager(secret='b#=x&h)cms#lsr*4+jghmlsrpe^p3nyoamu$860gip$4h+00w', token_url='/login', use_cookie=True)
+manager = LoginManager(
+    secret='b#=x&h)cms#lsr*4+jghmlsrpe^p3nyoamu$860gip$4h+00w', 
+    token_url='/login', 
+    use_cookie=True,
+)
 
 
-@app.get(path="/", response_class=_fastapi.responses.HTMLResponse, status_code=_fastapi.status.HTTP_200_OK)
+@app.get(
+    path="/", 
+    response_class=_fastapi.responses.HTMLResponse, 
+    status_code=_fastapi.status.HTTP_200_OK,
+)
 def read_root():
-    # return {"message": "Hello World", "Cor": str(os.getenv(key='COR', default="AZUL")), "PID": str(os.getpid()), "HostName": str(socket.gethostname())}
     cor = os.getenv(key='COR', default="#000000")
     cor_descr = os.getenv(key='COR_DESCR', default="PRETO")
     html_content = f'''
-        <!DOCTYPE html> 
-        <html> 
-            <body bgcolor="#{str(cor)}"> 
-                <div style="text-align: center"> 
-                    <br/> <br/>
-                    <h1 style="color: white">EU SOU A COR {str(cor_descr)}</h1> 
-                    <p style="color: white">PID: {str(os.getpid())}</p> 
-                    <p style="color: white">HostName: {str(socket.gethostname())}</p>
-                </div> 
-            </body> 
-        </html> 
-    '''
-    return _fastapi.responses.HTMLResponse(content=html_content, status_code=_fastapi.status.HTTP_200_OK)
+<!DOCTYPE html>
+<html>
+<body bgcolor="#{str(cor)}">
+<div style="text-align: center">
+<br/><br/>
+<h1 style="color: white">EU SOU A COR {str(cor_descr)}</h1>
+<p style="color: white">PID: {str(os.getpid())}</p>
+<p style="color: white">HostName: {str(socket.gethostname())}</p>
+</div>
+</body>
+</html>
+'''
+    return _fastapi.responses.HTMLResponse(
+        content=html_content, 
+        status_code=_fastapi.status.HTTP_200_OK,
+    )
 
 
 @app.get(path="/test", status_code=_fastapi.status.HTTP_200_OK)
 def read_test():
-    return {"message": "Hello World", "Cor": str(os.getenv(key='COR', default="AZUL")), "PID": str(os.getpid()), "HostName": str(socket.gethostname())}
+    return {
+        "message": "Hello World", 
+        "Cor": str(os.getenv(key='COR', default="AZUL")), 
+        "PID": str(os.getpid()), 
+        "HostName": str(socket.gethostname()),
+    }
 
 
 fake_db = {'chris@.mail': {'password': '123'}}
@@ -47,17 +62,30 @@ def load_user(email: str):
 
 
 @app.get(path='/login', status_code=_fastapi.status.HTTP_200_OK)
-def login(response: _fastapi.Response):  # data: OAuth2PasswordRequestForm = _fastapi.Depends() , user = Depends(manager)
+def login(response: _fastapi.Response):
+    # data: OAuth2PasswordRequestForm = _fastapi.Depends() 
     email = "chris@.mail"  # data.username
     password = "123"  # data.password
     user = load_user(email)
     if not user:
-        raise InvalidCredentialsException  # you can also use your own HTTPException
+        raise InvalidCredentialsException 
     elif password != user['password']:
         raise InvalidCredentialsException
-    access_token = manager.create_access_token(data=dict(sub=email), expires=timedelta(hours=12))
-    manager.set_cookie(response=response, token=access_token)
-    return {'access_token': access_token, 'token_type': 'bearer'}
+        
+    access_token = manager.create_access_token(
+        data=dict(sub=email), 
+        expires=timedelta(hours=12),
+    )
+
+    manager.set_cookie(
+            response=response, 
+            token=access_token,
+        )
+
+    return {
+            'access_token': access_token, 
+            'token_type': 'bearer',
+        }
 
 
 @app.get(path='/logado', status_code=_fastapi.status.HTTP_200_OK)

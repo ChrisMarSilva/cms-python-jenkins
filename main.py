@@ -9,16 +9,16 @@ from fastapi_login.exceptions import InvalidCredentialsException
 
 app = _fastapi.FastAPI()
 manager = LoginManager(
-    secret='b#=x&h)cms#lsr*4+jghmlsrpe^p3nyoamu$860gip$4h+00w',
-    token_url='/login',
-    use_cookie=True,
+secret='b#=x&h)cms#lsr*4+jghmlsrpe^p3nyoamu$860gip$4h+00w',
+token_url='/login',
+use_cookie=True,
 )
 
 
 @app.get(
-    path="/",
-    response_class=_fastapi.responses.HTMLResponse,
-    status_code=_fastapi.status.HTTP_200_OK,
+path="/",
+response_class=_fastapi.responses.HTMLResponse,
+status_code=_fastapi.status.HTTP_200_OK,
 )
 def read_root():
     cor = os.getenv(key='COR', default="#000000")
@@ -45,10 +45,10 @@ def read_root():
 @app.get(path="/test", status_code=_fastapi.status.HTTP_200_OK)
 def read_test():
     return {
-        "message": "Hello World",
-        "Cor": str(os.getenv(key='COR', default="AZUL")),
-        "PID": str(os.getpid()),
-        "HostName": str(socket.gethostname()),
+"message": "Hello World",
+"Cor": str(os.getenv(key='COR', default="AZUL")),
+"PID": str(os.getpid()),
+"HostName": str(socket.gethostname()),
     }
 
 
@@ -73,29 +73,29 @@ def login(response: _fastapi.Response):
         raise InvalidCredentialsException
 
     access_token = manager.create_access_token(
-        data=dict(sub=email),
-        expires=timedelta(hours=12),
+data=dict(sub=email),
+expires=timedelta(hours=12),
     )
 
     manager.set_cookie(
-            response=response,
-            token=access_token,
+response=response,
+token=access_token,
         )
 
     return {
-            'access_token': access_token,
-            'token_type': 'bearer',
+'access_token': access_token,
+'token_type': 'bearer',
         }
 
 
 @app.get(path='/logado', status_code=_fastapi.status.HTTP_200_OK)
 def protected_route(user=_fastapi.Depends(manager)):
     return {
-        'cor': str(os.getenv(key='COR', default="#000000")),
-        'cor_descr': str(os.getenv(key='COR_DESCR', default="PRETO")),
-        'pid': str(os.getpid()),
-        'hostname': str(socket.gethostname()),
-        'username': user,
+'cor': str(os.getenv(key='COR', default="#000000")),
+'cor_descr': str(os.getenv(key='COR_DESCR', default="PRETO")),
+'pid': str(os.getpid()),
+'hostname': str(socket.gethostname()),
+'username': user,
     }
 
 

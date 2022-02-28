@@ -32,6 +32,11 @@ def read_root():
     return _fastapi.responses.HTMLResponse(content=html_content, status_code=_fastapi.status.HTTP_200_OK)
 
 
+@app.get(path="/test", status_code=_fastapi.status.HTTP_200_OK)
+def read_test():
+    return {"message": "Hello World", "Cor": str(os.getenv(key='COR', default="AZUL")), "PID": str(os.getpid()), "HostName": str(socket.gethostname())}
+
+
 fake_db = {'chris@.mail': {'password': '123'}}
 
 

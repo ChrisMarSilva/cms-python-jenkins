@@ -14,9 +14,11 @@ client_local = TestClient(app)
 
 
 def test_read_root():
-    response = client_local.get(url="/")
+    response = client_local.get(url="/test")
     body = response.json()
     assert response.status_code == 200
     assert body["message"] == "Hello World"
 
 # pytest
+# pytest -v
+# pytest -vv

@@ -272,5 +272,58 @@ pipeline {
     }
 }
 
+
+pipeline {
+    agent any
+
+    stages {
+        
+        stage('Git Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git']]])
+            }
+        }
+        
+        stage('Git Clone') {
+            steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git'
+            }
+        }
+        
+        stage('App Build Run') {
+            steps {
+                bat 'python run.py'
+            }
+        }
+        
+        stage('App Install') {
+            steps {
+                bat 'python -m pip install --upgrade pip'
+                bat 'python -m pip install -r requirements.txt --user --no-cache'
+            }
+        }
+        
+        stage('App Build Main') {
+            steps {
+                echo 'Teh job has been Builded'
+                //bat 'python -m uvicorn main:app --reload' // ok, mas ele fica em loop infinito, pq eh uma API
+            }
+        }
+        
+        stage('App Test') {
+            steps {
+                echo 'Teh job has been tested'
+                //bat 'python -m pytest --alluredir=/tmp'
+                //bat 'python -m pytest --alluredir="./result.xml" -rf -m jenkins_run'
+                //bat 'python -m pytest -v test_main.py' //  --junitxml=reports/result.xml
+            }
+        }
+        
+    }
+    
+}
+
+
+
 */
 

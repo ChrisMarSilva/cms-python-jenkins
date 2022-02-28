@@ -19,6 +19,7 @@ pipeline {
         stage ('Docker Build') {
             steps {
                 echo 'Docker Build ok....'
+                sh 'python --version'
 //                 script {
 //                     dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
 //                 }
@@ -69,23 +70,10 @@ https://www.fourkitchens.com/blog/article/trigger-jenkins-builds-pushing-github/
 https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
 
 pipeline {
-    agent { docker { image 'python:3.10.1-alpine' } }
-    stages {
-        stage('build') {
-            steps {
-                echo 'Build Image ok2....'
-                //sh 'python --version'
-            }
-        }
-    }
-}
-
-
-pipeline {
-    //agent any
+    agent any
     //agent { docker { image 'tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim' } }
     //agent { docker { image 'python3.9-slim' } }
-    agent { docker { image 'python:3.10.1-alpine' } }
+    //agent { docker { image 'python:3.10.1-alpine' } }
     //agent { docker { image 'python:3.7' label 'docker && linux' } }
     // agent { dockerfile { filename 'Dockerfile' } }
     // agent { docker { image 'python:3.9-slim-buster' } }

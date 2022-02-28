@@ -1,6 +1,5 @@
 pipeline {
-    //agent any
-    agent { dockerfile { filename 'Dockerfile' } }
+    agent any
 
     stages {
 
@@ -13,7 +12,7 @@ pipeline {
         stage('Get Source') {
             steps {
                 echo 'Git Checkout ok....'
-                //git branch: 'main', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git' //, credentialsId: 'github'
+                git branch: 'main', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git' //, credentialsId: 'github'
             }
         }
 
@@ -21,10 +20,10 @@ pipeline {
             steps {
                 echo 'Docker Build ok....'
                 //sh 'python --version'
-                sh 'python -V'
-                sh 'python -m pip install --upgrade pip'
+                //sh 'python -V'
+                //sh 'python -m pip install --upgrade pip'
                 //sh 'pip install --upgrade pip'
-                //sh 'python -m pip install -r requirements.txt --user --no-cache'
+                sh 'python -m pip install -r requirements.txt --user --no-cache'
 //                 script {
 //                     dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
 //                 }

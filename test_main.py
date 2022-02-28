@@ -22,3 +22,4 @@ def test_read_root():
 # pytest
 # pytest -v
 # pytest -vv
+# pytest --cov=test_

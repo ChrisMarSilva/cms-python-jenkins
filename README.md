@@ -47,7 +47,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 ```
 
-## License
+## Site CMS
 
-[BSD 3-Clause License](https://github.com/alexanderdamiani/pytester-cov/blob/main/LICENSE)
+[TamoNaBolsa](https://www.tamonabolsa.com.br/)
 

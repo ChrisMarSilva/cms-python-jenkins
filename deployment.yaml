@@ -1,4 +1,38 @@
 ---
+# limite por pods
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: wrk-jenkins-limit-range
+spec:
+  limits:
+  - default:
+      cpu: 500m
+      memory: 128Mi
+    defaultRequest:
+      cpu: 250m
+      memory: 64Mi
+    max:
+      cpu: 1000m
+      memory: 128Mi # 1Gi
+    min:
+      cpu: 100m
+      memory: 64Mi
+    type: Container
+---
+# limite por namespace
+# apiVersion: v1
+# kind: ResourceQuota
+# metadata:
+#   name: wrk-jenkins
+# spec:
+#   hard:
+#     pods: "4"
+#     requests.cpu: "1.5"
+#     requests.memory: 1Gi
+#     limits.cpu: "5" 
+#     limits.memory: 2Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,6 +59,13 @@ spec:
           env:
           - name: COR
             value: PRETO-01
+          # resources:
+          #   requests:
+          #     cpu: "250m"
+          #     memory: "64Mi"
+          #   limits:
+          #     cpu: "500m"
+          #     memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service

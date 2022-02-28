@@ -23,7 +23,7 @@ pipeline {
                 //sh 'python -V'
                 //sh 'python -m pip install --upgrade pip'
                 //sh 'pip install --upgrade pip'
-                sh 'python -m pip install -r requirements.txt --user --no-cache'
+                //sh 'python -m pip install -r requirements.txt --user --no-cache'
 //                 script {
 //                     dockerapp = docker.build("chrismarsilva/cms-python-jenkins:${env.BUILD_ID}", '-f ./Dockerfile ./')
 //                 }
@@ -70,9 +70,6 @@ pipeline {
 // cms-python-jenkins
 // https://github.com/ChrisMarSilva/cms-python-jenkins.git
 
-https://www.fourkitchens.com/blog/article/trigger-jenkins-builds-pushing-github/
-https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
-
 pipeline {
     agent any
     //agent { docker { image 'tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim' } }
@@ -81,7 +78,6 @@ pipeline {
     //agent { docker { image 'python:3.7' label 'docker && linux' } }
     // agent { dockerfile { filename 'Dockerfile' } }
     // agent { docker { image 'python:3.9-slim-buster' } }
-
 
     stages {
 

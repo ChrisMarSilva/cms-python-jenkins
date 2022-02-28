@@ -13,7 +13,7 @@ pipeline {
         stage('Get Source') {
             steps {
                 echo 'Git Checkout ok....'
-                git branch: 'main', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git' //, credentialsId: 'github'
+                //git branch: 'main', url: 'https://github.com/ChrisMarSilva/cms-python-jenkins.git' //, credentialsId: 'github'
             }
         }
 

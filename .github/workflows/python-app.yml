@@ -311,3 +311,46 @@ jobs:
 #          process_type: web
 
 # **************************************************************************************************************** #
+
+
+# # Controls when the workflow will run
+# on:
+#   workflow_dispatch
+#   push:
+#     branches:
+#       - 'main'
+#       - 'dev'
+#     tags:
+#       - 'v*.*.*'
+#   pull_request:
+#     branches:
+#       - 'main'
+#       - 'dev'
+
+# # permissions are needed if pushing to ghcr.io
+# permissions: 
+#   packages: write
+
+#           push: ${{ github.event_name != 'pull_request' }}
+#           tags: ${{ steps.<meta_id>.outputs.tags }}
+#           labels: ${{ steps.<meta_id>.outputs.labels }}
+#  push: ${{ GitHub.event_name != 'pull_request' }}
+
+#           tags: ${{ steps.meta.outputs.tags }}
+#           labels: ${{ steps.meta.outputs.labels }}
+
+#  if: GitHub.event_name != 'pull_request'
+#           tags: ${{ steps.prep.outputs.tags }}
+
+# push: ${{ github.ref == 'refs/heads/main' }}
+
+# if: ${{ github.event_name == 'push' }} // OR
+# if: ${{ github.event_name == 'pull_request' }}
+#  run: echo ${{ steps.docker_build.outputs.digest }}
+
+
+#  # Set output parameters.
+#           echo ::set-output name=tags::${TAGS}
+#           echo ::set-output name=docker_image::${DOCKER_IMAGE}
+
+

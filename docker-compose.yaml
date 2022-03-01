@@ -11,6 +11,7 @@ services:
     image: nginx:1.21.6-alpine
     restart: always
     volumes:
+      - ./api_secret.jwk:/etc/nginx/api_secret.jwk
       - ./nginx.conf:/etc/nginx/nginx.conf  # para Configurações Gerais
       # - ./nginx.conf:/etc/nginx/conf.d/default.conf  # para Configurações Específicas  # comente enviar os "upstream" e o "server", nao deve ter o "events" e nem o "http"
       - ./log/nginx:/var/log/nginx
@@ -30,7 +31,8 @@ services:
       - COR=000000
       - COR_DESCR=PRETO
     volumes:
-      - .:/code
+      #- .:/code
+      - ./main.py:/usr/app/main.py
     networks:
       - network-web-fastapi-proxy
 
@@ -42,7 +44,8 @@ services:
       - COR=FF0000
       - COR_DESCR=VERMELHO
     volumes:
-      - .:/code
+      #- .:/code
+      - ./main.py:/usr/app/main.py
     networks:
       - network-web-fastapi-proxy
 
@@ -54,7 +57,8 @@ services:
       - COR=00FF00
       - COR_DESCR=VERDE
     volumes:
-      - .:/code
+      #- .:/code
+      - ./main.py:/usr/app/main.py
     networks:
       - network-web-fastapi-proxy
 
@@ -66,6 +70,7 @@ services:
       - COR=0000FF
       - COR_DESCR=AZUL
     volumes:
-      - .:/code
+      #- .:/code
+      - ./main.py:/usr/app/main.py
     networks:
       - network-web-fastapi-proxy

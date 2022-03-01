@@ -25,7 +25,10 @@ FROM python:3.10-slim
 WORKDIR /usr/app
 
 COPY --from=build /usr/app/venv ./venv
-COPY . .
+#COPY . .
+COPY main.py .
+COPY test_main.py .
+COPY run.py .
 
 ENV PATH="/usr/app/venv/bin:$PATH"
 

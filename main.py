@@ -9,7 +9,7 @@ from fastapi_login.exceptions import InvalidCredentialsException
 
 app = _fastapi.FastAPI()
 manager = LoginManager(
-    secret='b#=x&h)cms#lsr*4+jghmlsrpe^p3nyoamu$860gip$4h+00w',
+    secret='b#=x&h)cms#lsr*4+jghmlsrpe^p3nyoamu$860gip$4h+00w', 
     token_url='/login',
     use_cookie=True,
 )

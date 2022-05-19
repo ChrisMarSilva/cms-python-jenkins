@@ -1,5 +1,5 @@
 cms-python-jenkins-2
-token: 6e9a46b12b527727de10ea56193364a344f26f07
+
 C:\Users\chris\Desktop\cms-python-jenkins
 
 sonar-scanner.bat -D"sonar.projectKey=cms-python-jenkins" -D"sonar.sources=." -D"sonar.host.url=http://127.0.0.1:9000" -D"sonar.login=6e9a46b12b527727de10ea56193364a344f26f07"
